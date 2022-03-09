@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<JsonFileProductService>();
 builder.Services.AddControllers();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
@@ -31,8 +32,9 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapRazorPages();
     endpoints.MapControllers();
+    endpoints.MapRazorPages();
+    endpoints.MapBlazorHub();
     //endpoints.MapGet("/products", (context) =>
     //{
     //    var products = app.Services.GetService<JsonFileProductService>().GetProducts();
@@ -41,11 +43,6 @@ app.UseEndpoints(endpoints =>
     //});
 
 });
-
-
-app.MapRazorPages();
-
-
 
 app.Run();
 
